@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reconocimiento Facial</title>
+  <meta name="mphtools-feature" content="compatibilityUI, cameraPrivacyPopup, compatibilityAutoCheck">
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+  <header>
+    <h1>Reconocimiento Facial</h1>
+  </header>
+  <div class="container">
+    <div id="results-container">
+      <div id="age">Edad: -</div>
+      <div id="gender">Género: -</div>
+      <div id="emotion">Emoción Predominante: </div>
+    </div>
+    <div id="video-container">
+      <video id="camera" autoplay playsinline></video>
+    </div>
+  </div>
+  <div class="container1">
+    <p>Histograma de Emociones</p>
+  </div>
+  <div class="container">
+    <div id="emotion-histogram"></div>
+  </div>
+</body>
+
+</div>
+
+  </div>
+
+  <script src="https://sdk.morphcast.com/mphtools/v1.0/mphtools.js"></script>
+  <script src="https://ai-sdk.morphcast.com/v1.16/ai-sdk.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <script src="script.js"></script>
+
+</body>
+
+</html>
