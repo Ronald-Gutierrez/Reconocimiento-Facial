@@ -137,3 +137,43 @@ navigator.mediaDevices.getUserMedia({ video: true })
   .catch((error) => {
     console.error('Error accessing camera:', error);
   });
+
+
+
+
+  //CODIGO PARA ENVIAR LOS DATOS AL REAL ENFGINE
+  const fs = require('fs'); // Importa el módulo fs para trabajar con archivos
+
+// Función para convertir un objeto en formato XML
+function objectToXml(obj) {
+  let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
+  xml += '<emociones>\n';
+  for (const key in obj) {
+    xml += `<${key}>${obj[key]}</${key}>\n`;
+  }
+  xml += '</emociones>';
+  return xml;
+}
+
+// Datos de las emociones
+const emociones = {
+  Enojo: 0,
+  Disgusto: 0,
+  Miedo: 0,
+  Felicidad: 0,
+  Neutro: 0,
+  Triste: 0,
+  Sopresa: 0,
+};
+
+// Llama a la función para convertir el objeto en XML
+const xmlData = objectToXml(emociones);
+
+// Guarda el XML en un archivo llamado emociones.xml
+fs.writeFile('emociones.xml', xmlData, (err) => {
+  if (err) {
+    console.error('Error al guardar el archivo XML:', err);
+  } else {
+    console.log('Archivo XML guardado correctamente.');
+  }
+});
