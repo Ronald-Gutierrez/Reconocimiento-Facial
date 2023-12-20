@@ -10,7 +10,7 @@ body, html {
 
 header {
   background-color: #c3a2ee;
-  color: rgb(14, 13, 13);
+  color: rgb(179, 10, 10);
   padding: 10px 0;
   display: flex;
   height: 8%;
@@ -59,7 +59,12 @@ header {
 
 #emotion-histogram {
   width: 100%; 
+  
 }
+#emotion {
+  font-size: 16px;
+}
+
 
 .main {
   display: flex;
