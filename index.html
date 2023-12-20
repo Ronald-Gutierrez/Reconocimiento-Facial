@@ -7,27 +7,72 @@
   <title>Reconocimiento Facial</title>
   <meta name="mphtools-feature" content="compatibilityUI, cameraPrivacyPopup, compatibilityAutoCheck">
   <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="style_game.css">
 </head>
 
 <body>
   <header>
     <h1>Reconocimiento Facial</h1>
   </header>
-  <div class="container">
-    <div id="results-container">
-      <div id="age">Edad: -</div>
-      <div id="gender">Género: -</div>
-      <div id="emotion">Emoción Predominante: </div>
+  <div class="main">
+    <div class="main-game">
+      <div class="game">
+        <div id="maze"></div>
+      </div>
+
+      <div class="leyenda">
+          <div class="box">
+            <div class="text">
+              <div class="cell">
+              </div>
+              <h1>Inicio</h1>
+            </div>
+
+            <div class="text">
+              <div class="player">
+              </div>
+              <h1>Fin</h1>
+            </div>
+
+            <div class="text">
+              <div class="obstacle">
+              </div>
+              <h1>Pared</h1>
+            </div>
+
+            <div class="text">
+              <div class="final">
+              </div>
+              <h1>Final</h1>
+            </div>
+          </div>
+        <div class="arrow">
+          <div class="up"><h1>😃</h1></div>
+          
+          <div class="down"><h1>😢</h1></div>
+          <div class="left"><h1>😱</h1></div>
+          <div class="right"><h1>😡</h1></div>
+        </div>
+      </div>
     </div>
-    <div id="video-container">
-      <video id="camera" autoplay playsinline></video>
+    <div class="emotions">
+      <div class="container">
+        <div id="results-container">
+          <div id="age">Edad: -</div>
+          <div id="gender">Género: -</div>
+          <div id="emotion">Emoción Predominante: </div>
+        </div>
+        <div id="video-container">
+          <video id="camera" autoplay playsinline></video>
+        </div>
+      </div>
+      <div class="container1">
+        <p>Histograma de Emociones</p>
+      </div>
+      <div class="container">
+        <div id="emotion-histogram"></div>
+      </div>
     </div>
-  </div>
-  <div class="container1">
-    <p>Histograma de Emociones</p>
-  </div>
-  <div class="container">
-    <div id="emotion-histogram"></div>
   </div>
 </body>
 
@@ -39,6 +84,7 @@
   <script src="https://ai-sdk.morphcast.com/v1.16/ai-sdk.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
   <script src="script.js"></script>
+  <script src="script_game.js"></script>
 
 </body>
 

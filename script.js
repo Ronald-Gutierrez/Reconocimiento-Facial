@@ -41,10 +41,7 @@ window.addEventListener(CY.modules().FACE_AGE.eventName, (evt) => {
 });
 
 window.addEventListener(CY.modules().FACE_GENDER.eventName, (evt) => {
-  // Obtiene el género en inglés
   const generoEnIngles = evt.detail.output.mostConfident;
-
-  // Traduce el género a español usando el mapeo
   const generoEnEspanol = generosEnEspanol[generoEnIngles];
 
   gen_div.textContent = 'Género: ' + generoEnEspanol;

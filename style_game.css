@@ -1,0 +1,66 @@
+
+
+#maze {
+    display: grid;
+    grid-template-columns: repeat(10, 50px);
+    grid-template-rows: repeat(10, 50px);
+}
+
+.cell {
+    width: 50px;
+    height: 50px;
+    border: 1px solid #000;
+    box-sizing: border-box;
+    background-color: aliceblue;
+}
+
+.player {
+    width: 50px;
+    height: 50px;
+    background-color: #00f;
+}
+
+.obstacle {
+    width: 50px;
+    height: 50px;
+    background-color: #333;
+}
+.final {
+    width: 50px;
+    height: 50px;
+    background-color: #f00;
+}
+.text {
+    display: flex;
+    height: 100%;
+    width: 25%;
+    align-items: center;
+    padding-left: 100px;
+}
+
+.text h1 {
+    margin-left: 10px;
+    font-size: 20px;
+
+}
+
+.leyenda {
+    display: flex;
+    width: 100%;
+    height: 215px;
+}
+.content {
+    display: flex;
+    width: 100%;
+    height: 215px;
+}
+.box {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 100%;
+    justify-content: center;
+}
+.game {
+    height: 450px;
+}
