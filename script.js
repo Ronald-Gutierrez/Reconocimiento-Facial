@@ -8,8 +8,8 @@ CY.loader()
 
 const emocionesEnEspanol = {
   Anger: 'Enojo',
-  Disgust: 'Disgusto',
-  Fear: 'Miedo',
+  //Disgust: 'Disgusto',
+  //Fear: 'Miedo',
   Happy: 'Felicidad',
   Neutral: 'Neutro',
   Sad: 'Tristeza',
@@ -56,8 +56,8 @@ window.addEventListener(CY.modules().FACE_EMOTION.eventName, (evt) => {
 
 const initialEmotionData = {
   Enojo: 0,
-  Disgusto: 0,
-  Miedo: 0,
+  //Disgusto: 0,
+  //Miedo: 0,
   Felicidad: 0,
   Neutro: 0,
   Triste: 0,
@@ -155,8 +155,8 @@ function objectToXml(obj) {
 // Datos de las emociones
 const emociones = {
   Enojo: 0,
-  Disgusto: 0,
-  Miedo: 0,
+  //Disgusto: 0,
+  //Miedo: 0,
   Felicidad: 0,
   Neutro: 0,
   Triste: 0,
