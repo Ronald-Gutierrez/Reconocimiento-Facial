@@ -75,14 +75,21 @@ header {
 
 }
 .main-game {
-  display: flex;
   width: 55%;
   height: 100%;
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 50px;
 }
+
+.sub-game{
+  display: grid;
+  grid-template-columns: 90% 10%;
+  gap: 2rem;
+}
+
 .emotions {
   width: 35%;
   border: 10px;
@@ -90,14 +97,14 @@ header {
 
 
 .arrow {
-  width: 50%;
-  justify-content: center;
   display: flex;
   flex-direction: column;
-  align-items: start;
-  
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
 }
 
+.arrow .neutral,
 .arrow .up,
 .arrow .down,
 .arrow .left,
@@ -110,11 +117,15 @@ header {
   margin: 10px;
 }
 
+.arrow .neutral h1,
 .arrow .up h1,
 .arrow .down h1,
 .arrow .left h1,
 .arrow .right h1{
   margin-left: 60px;
+  font-size: 60px;
+  border-radius: 2.5rem;
+  padding: 0;
 }
 
 .arrow .up::before {
@@ -147,8 +158,8 @@ header {
 .arrow .right::before {
   content: '';
   position: absolute;
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -157,3 +168,8 @@ header {
 }
 
 
+.leyenda {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}

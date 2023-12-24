@@ -1,3 +1,9 @@
+const $neutralIcon = document.getElementById("neutral")
+const $happyIcon = document.getElementById("up")
+const $thirstyIcon = document.getElementById("down")
+const $surprisedIcon = document.getElementById("left")
+const $angryIcon = document.getElementById("right")
+
 document.addEventListener("DOMContentLoaded", function() {
     const maze = document.getElementById("maze");
     let playerSquare = document.createElement("div");
@@ -45,25 +51,57 @@ document.addEventListener("DOMContentLoaded", function() {
         cells[playerPosition].classList.remove("player");
 
         switch(emotion) {
+            case "Neutral":
+                $neutralIcon.classList.add("shine")
+                setTimeout(()=>{
+                    if($neutralIcon.classList.contains("shine")){
+                        $neutralIcon.classList.remove("shine")
+                    }
+                },500)
+                break;
             case "Happy": // Mueve hacia abajo
+                $happyIcon.classList.add("shine")
                 if (row + 1 < mazeArray.length && mazeArray[row + 1][col] !== "X") {
                     playerPosition += mazeArray[0].length;
                 }
+                setTimeout(()=>{
+                    if($happyIcon.classList.contains("shine")){
+                        $happyIcon.classList.remove("shine")
+                    }
+                },500)
                 break;
             case "Sad": // Mueve hacia arriba
+                $thirstyIcon.classList.add("shine")
                 if (row - 1 >= 0 && mazeArray[row - 1][col] !== "X") {
                     playerPosition -= mazeArray[0].length;
                 }
+                setTimeout(()=>{
+                    if($thirstyIcon.classList.contains("shine")){
+                        $thirstyIcon.classList.remove("shine")
+                    }
+                },500)
                 break;
             case "Surprise": // Mueve hacia la derecha
+                $surprisedIcon.classList.add("shine")
                 if (col + 1 < mazeArray[0].length && mazeArray[row][col + 1] !== "X") {
                     playerPosition += 1;
                 }
+                setTimeout(()=>{
+                    if($surprisedIcon.classList.contains("shine")){
+                        $surprisedIcon.classList.remove("shine")
+                    }
+                },500)
                 break;
             case "Angry": // Mueve hacia la izquierda
+                $angryIcon.classList.add("shine")
                 if (col - 1 >= 0 && mazeArray[row][col - 1] !== "X") {
                     playerPosition -= 1;
                 }
+                setTimeout(()=>{
+                    if($angryIcon.classList.contains("shine")){
+                        $angryIcon.classList.remove("shine")
+                    }
+                },500)
                 break;
             // Maneja otras emociones según sea necesario
         }
