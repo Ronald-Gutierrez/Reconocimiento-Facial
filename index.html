@@ -11,9 +11,13 @@
 </head>
 
 <body>
-  
+  <div id="overlay"></div>
+  <div id="foregroundSquare">Sonríe para empezar <br>
+    😃
+  </div>
+  <div id="startText">.</div>
   <header>
-    <h1>Llega al cuadrado rojo y gana</h1>
+    <h1>Controla tus emociones y llega a la meta</h1>
   </header>
   <div class="main">
     <div class="main-game">
@@ -52,27 +56,32 @@
         <div class="text">
           <div class="final">
           </div>
-          <h1>Fin</h1>
+          <h1>Meta</h1>
         </div>
       </div>
     </div>
     <div class="emotions">
       <div class="container">
         <div id="results-container">
-          <div id="age">Edad: -</div>
-          <div id="gender">Género: -</div>
+          <!-- <div id="age">Edad: -</div>
+          <div id="gender">Género: -</div> -->
           <div id="emotion">Emoción Predominante: </div>
         </div>
         <div id="video-container">
           <video id="camera" autoplay playsinline></video>
         </div>
+      </div><br>
+      <div class="boxMessage" id="boxMessage">
+        <div class="message">
+          <h1 id="messageText">Haz emociones para llegar a la meta</h1>
+        </div>
       </div>
-      <div class="container1">
+      <!-- <div class="container1">
         <p>Histograma de Emociones</p>
       </div>
       <div class="container">
         <div id="emotion-histogram"></div>
-      </div>
+      </div> -->
     </div>
   </div>
 </body>
