@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Lógica para controlar el juego basado en la emoción detectada
     if (gameStandby) {
-      if (smileDetected && emotion === "Happy") {
+      if (smileDetected) {
         startGame();
       }
     } else if (gameStarted) {
@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
           }, 500);
           break;
-        case "Happy": // Mueve hacia abajo
+        case "down": // Mueve hacia abajo
           $happyIcon.classList.add("shine");
           if (row + 1 < mazeArray.length && mazeArray[row + 1][col] !== "X") {
             playerPosition += mazeArray[0].length;
@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
           }, 500);
           break;
-        case "Sad": // Mueve hacia arriba
+        case "up": // Mueve hacia arriba
           $thirstyIcon.classList.add("shine");
           if (row - 1 >= 0 && mazeArray[row - 1][col] !== "X") {
             playerPosition -= mazeArray[0].length;
@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
           }, 500);
           break;
-        case "Surprise": // Mueve hacia la derecha
+        case "right": // Mueve hacia la derecha
           $surprisedIcon.classList.add("shine");
           if (col + 1 < mazeArray[0].length && mazeArray[row][col + 1] !== "X") {
             playerPosition += 1;
@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
           }, 500);
           break;
-        case "Angry": // Mueve hacia la izquierda
+        case "left": // Mueve hacia la izquierda
           $angryIcon.classList.add("shine");
           if (col - 1 >= 0 && mazeArray[row][col - 1] !== "X") {
             playerPosition -= 1;
@@ -178,7 +178,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Cambia el fondo a rojo y el contenido del texto a "Peligro"
     boxMessage.style.backgroundColor = "red";
     messageText.textContent = "No presiones teclas, ¡solo juega con las emociones!";
-    
+
     // Restaura el estado original después de 2 segundos
     setTimeout(() => {
       boxMessage.style.backgroundColor = originalBackgroundColor;
@@ -190,19 +190,59 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 2000);
   }
 
-  // Actualiza la posición del cuadrado azul cuando se reconoce una nueva emoción
-  window.addEventListener(CY.modules().FACE_EMOTION.eventName, (evt) => {
-    const emotionEnIngles = evt.detail.output.dominantEmotion;
-    if (emotionEnIngles === "Happy" && !smileDetected) {
-      smileDetected = true;
-      // Agregar un temporizador para esperar 2 segundos después de la detección de la sonrisa
-      setTimeout(() => {
-        movePlayerSquare(emotionEnIngles);
-      }, 1000);
-    } else {
-      movePlayerSquare(emotionEnIngles);
-    }
-  });
+  const config = { smoothness: 0.80 };
+  CY.loader()
+    .licenseKey("4efce2041fb8db76165ffb122b3515a0cb60e8740dfd")
+    .addModule(CY.modules().FACE_POSE.name, config)
+    .load()
+    .then(({ start, stop }) => {
+      start();
+
+      window.addEventListener(CY.modules().FACE_POSE.eventName, (evt) => {
+        let positionFaceVertical = evt.detail.output.pose.pitch * 100;
+        let positionFaceHorizontal = evt.detail.output.pose.yaw * 100;
+
+        let move;
+
+        if (Math.abs(positionFaceHorizontal) > Math.abs(positionFaceVertical)) {
+          if (positionFaceHorizontal < 0) {
+            move = "right";
+          } else if (positionFaceHorizontal > 0) {
+            move = "left";
+          }
+        } else {
+          if (positionFaceVertical < 0) {
+            move = "up";
+          } else if (positionFaceVertical > 0) {
+            move = "down";
+          }
+        }
+
+        if (!smileDetected) {
+          smileDetected = true;
+          // Agregar un temporizador para esperar 2 segundos después de la detección de la sonrisa
+          setTimeout(() => {
+            movePlayerSquare(move);
+          }, 1000);
+        } else {
+          movePlayerSquare(move);
+        }
+      });
+    })
+    .catch((error) => {
+      console.error('Error loading the facial recognition module:', error);
+    });
+
+  const cameraView = document.getElementById('camera-view');
+  navigator.mediaDevices.getUserMedia({ video: true })
+    .then((stream) => {
+      cameraView.srcObject = stream;
+    })
+    .catch((error) => {
+      console.error('Error accessing camera:', error);
+    });
+
+
 
   // Agregar la lógica para cambiar el color de fondo y el contenido del texto al presionar cualquier letra
   document.addEventListener("keydown", function (event) {
