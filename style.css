@@ -121,18 +121,22 @@ header {
   margin: 10px;
 }
 
+
+
 .arrow .neutral h1,
 .arrow .up h1,
 .arrow .down h1,
 .arrow .left h1,
 .arrow .right h1{
-  margin-left: 60px;
+  margin-left: 10px;
   font-size: 60px;
   border-radius: 2.5rem;
   padding: 0;
 }
-
-.arrow .up::before {
+.arrow span{
+  font-size: 80px;
+}
+/*.arrow .up::before {
   top: 0;
   left: 50%;
   transform: translateX(-50%) rotate(180deg);
@@ -170,7 +174,7 @@ header {
   background-color: #ff007f;
   clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
 }
-
+*/
 
 .leyenda {
   display: flex;
