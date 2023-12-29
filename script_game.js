@@ -4,10 +4,15 @@ const $thirstyIcon = document.getElementById("down");
 const $surprisedIcon = document.getElementById("left");
 const $angryIcon = document.getElementById("right");
 
+const boxMessage = document.getElementById("boxMessage");
+const messageText = document.getElementById("messageText");
+
 document.addEventListener("DOMContentLoaded", function () {
   //
   var audio = new Audio('error.mp3');
   //
+  var audio_fondo = new Audio('soundtrack.mp3')
+  audio_fondo.play()
   const maze = document.getElementById("maze");
   let playerSquare = document.createElement("div");
   playerSquare.classList.add("player");
@@ -133,6 +138,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function startGame() {
     gameStandby = false;
     gameStarted = true;
+    audio_fondo.play()
     //$player.classList.add("shine");
 
     // Oculta los elementos de inicio después de 2 segundos
@@ -141,6 +147,15 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("foregroundSquare").style.display = "none";
       document.getElementById("startText").style.display = "none";
     }, 2000);
+
+    setInterval(()=>{
+      messageText.textContent = `
+      Sonrie apliamente - 
+      Cierra los ojos de tristeza - 
+      Abre la boca de sorpresa - 
+      Frunce el ceño de enojo 
+      `
+    }, 4000)
 
   }
 
