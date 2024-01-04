@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var audio = new Audio('error.mp3');
   //
   var audio_fondo = new Audio('soundtrack.mp3')
-  audio_fondo.play()
+  // audio_fondo.play()
   const maze = document.getElementById("maze");
   let playerSquare = document.createElement("div");
   playerSquare.classList.add("player");
@@ -142,8 +142,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Check if the player reached the goal (customize the goal position as needed)
       if (playerPosition === cells.length-12 /*- mazeArray[0].length - 2*/) {
-        alert("¡Felicidades! Has alcanzado la meta.");
-        resetGame();
+        alert("Felicidades por completar el nivel 2!\nPasar al siguiente nivel.");
+        
+        window.location.href = 'calibration_down_rigth_up.html';
+        // resetGame();
       }
     }
   }
@@ -151,7 +153,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function startGame() {
     gameStandby = false;
     gameStarted = true;
-    audio_fondo.play()
+    // audio_fondo.play()
     //$player.classList.add("shine");
 
     // Oculta los elementos de inicio después de 2 segundos
