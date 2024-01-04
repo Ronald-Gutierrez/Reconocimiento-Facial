@@ -38,7 +38,10 @@
 .final {
     width: 50px;
     height: 50px;
-    background-color: #f00;
+    background-image: url("bandera-cuadros-carrera.jpg");
+    background-size: cover; /* Esta propiedad ajusta la imagen para cubrir todo el contenedor sin distorsionarla */
+    background-repeat: no-repeat;
+    /* background-color: #f00; */
 }
 .text {
     display: flex;
