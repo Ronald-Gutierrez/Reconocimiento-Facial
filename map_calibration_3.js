@@ -142,9 +142,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Check if the player reached the goal (customize the goal position as needed)
       if (playerPosition === 18 /*- mazeArray[0].length - 2*/) {
-        alert("Felicidades por completar el nivel 3!\nPasar al siguiente nivel.");
+        var popup = document.getElementById("popup");
+        popup.style.display = "block";
 
-        window.location.href = 'calibration_down_rigth_up_left.html';
+        document.getElementById("up").hidden = true;
+        document.getElementById("down").hidden = true;
+        document.getElementById("left").hidden = true;
+        
+        let elementosMaterial = document.getElementsByClassName("material-symbols-outlined");
+
+        for (var i = 0; i < elementosMaterial.length; i++) {
+            elementosMaterial[i].style.display = "none";
+        }
         // resetGame();
       }
     }
@@ -247,3 +256,12 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
+function cerrarPopup() {
+  window.location.href = 'calibration_down_rigth_up.html';
+}
+
+function pasarAlSiguienteNivel() {
+  window.location.href = 'calibration_down_rigth_up_left.html';
+  //cerrarPopup();
+}

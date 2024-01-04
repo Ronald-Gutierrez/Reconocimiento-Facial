@@ -8,10 +8,18 @@
   <meta name="mphtools-feature" content="compatibilityUI, cameraPrivacyPopup, compatibilityAutoCheck">
   <link rel="stylesheet" type="text/css" href="style.css">
   <link rel="stylesheet" type="text/css" href="style_game.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 
 <body>
+  <div class="popup" id="popup">
+    <div class="popup-content">
+      <p>Pasar al siguiente nivel?</p>
+      <button onclick="cerrarPopup()">No</button>
+      <button onclick="pasarAlSiguienteNivel()">Sí</button>
+    </div>
+  </div>
   <div id="overlay"></div>
   <div id="foregroundSquare">Sonríe para empezar <br>
     😃
@@ -34,7 +42,7 @@
           <div class="left" ><h1 id="left">😱</h1></div>
           <div class="right" ><h1 id="right">😡</h1></div>
           -->
-          <div class="up" >
+          <div class="up">
             <span class="material-symbols-outlined">arrow_downward</span>
             <h1 id="up">😃</h1>
           </div>
@@ -107,14 +115,14 @@
 
 </div>
 
-  </div>
-    <!-- 
+</div>
+<!-- 
       <script src="https://sdk.morphcast.com/mphtools/v1.0/mphtools.js"></script>
     -->
-  <script src="https://ai-sdk.morphcast.com/v1.16/ai-sdk.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-  <script src="script.js"></script>
-  <script src="map_calibration_4.js"></script>
+<script src="https://ai-sdk.morphcast.com/v1.16/ai-sdk.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="script.js"></script>
+<script src="map_calibration_4.js"></script>
 
 </body>
 

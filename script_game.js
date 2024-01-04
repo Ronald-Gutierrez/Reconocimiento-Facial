@@ -129,8 +129,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Check if the player reached the goal (customize the goal position as needed)
       if (playerPosition === cells.length - mazeArray[0].length - 2) {
-        alert("¡Felicidades! Has alcanzado la meta.");
-        resetGame();
+        //alert("¡Felicidades! Has alcanzado la meta.");
+        var popup = document.getElementById("popup");
+        popup.style.display = "block";
+
+        document.getElementById("up").hidden = true;
+        document.getElementById("down").hidden = true;
+        document.getElementById("left").hidden = true;
+        document.getElementById("right").hidden = true;
+        
+        let elementosMaterial = document.getElementsByClassName("material-symbols-outlined");
+
+        for (var i = 0; i < elementosMaterial.length; i++) {
+            elementosMaterial[i].style.display = "none";
+        }
+        // resetGame();
       }
     }
   }
@@ -232,3 +245,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
+function cerrarPopup() {
+  window.location.href = 'interfaz.html';
+  // resetGame();
+}
+
+function pasarAlSiguienteNivel() {
+  window.location.href = 'index.html';
+  //cerrarPopup();
+}

@@ -33,17 +33,17 @@ document.addEventListener("DOMContentLoaded", function () {
   ];
 
 
-//   const mazeArray = [
-//     ["", "", "X"],
-//     ["X", "", "X"],
-//     ["X", "", "X"],
-//     ["X", "", "X"],
-//     ["X", "", "X"],
-//     ["X", "", "X"],
-//     ["X", "", "X"],
-//     ["X", "", "X"],
-//     ["X", "M", "X"],
-//   ];
+  //   const mazeArray = [
+  //     ["", "", "X"],
+  //     ["X", "", "X"],
+  //     ["X", "", "X"],
+  //     ["X", "", "X"],
+  //     ["X", "", "X"],
+  //     ["X", "", "X"],
+  //     ["X", "", "X"],
+  //     ["X", "", "X"],
+  //     ["X", "M", "X"],
+  //   ];
 
   const cells = [];
 
@@ -141,10 +141,20 @@ document.addEventListener("DOMContentLoaded", function () {
       playerSquare.classList.add("player");
 
       // Check if the player reached the goal (customize the goal position as needed)
-      if (playerPosition === cells.length-9 /*- mazeArray[0].length - 2*/) {
-        alert("Felicidades por completar el nivel 1!\nPasar al siguiente nivel.");
+      if (playerPosition === cells.length - 9 /*- mazeArray[0].length - 2*/) {
+        // alert("Felicidades por completar el nivel 1!\nPasar al siguiente nivel.");
+        var popup = document.getElementById("popup");
+        popup.style.display = "block";
 
-        window.location.href = 'calibration_down_rigth.html';
+        document.getElementById("up").hidden = true;
+        
+        let elementosMaterial = document.getElementsByClassName("material-symbols-outlined");
+
+        for (var i = 0; i < elementosMaterial.length; i++) {
+            elementosMaterial[i].style.display = "none";
+        }
+
+        // window.location.href = 'calibration_down_rigth.html';
         // resetGame();
       }
     }
@@ -163,7 +173,7 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("startText").style.display = "none";
     }, 2000);
 
-    setInterval(()=>{
+    setInterval(() => {
       messageText.textContent = `
       Sonrie apliamente - 
       Cierra los ojos de tristeza - 
@@ -213,7 +223,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Cambia el fondo a rojo y el contenido del texto a "Peligro"
     boxMessage.style.backgroundColor = "red";
     messageText.textContent = "No presiones teclas, ¡solo juega con las emociones!";
-    
+
     // Restaura el estado original después de 2 segundos
     setTimeout(() => {
       boxMessage.style.backgroundColor = originalBackgroundColor;
@@ -247,3 +257,12 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
+function cerrarPopup() {
+  window.location.href = 'calibration_down.html';
+}
+
+function pasarAlSiguienteNivel() {
+  window.location.href = 'calibration_down_rigth.html';
+  //cerrarPopup();
+}
