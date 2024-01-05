@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var firstSmileDetected = false;
 
   CY.loader()
-    .licenseKey("4efce2041fb8db76165ffb122b3515a0cb60e8740dfd")
+    .licenseKey("vce97285a6837907318083a4084342d4af78340b61f49c")
     .addModule(CY.modules().FACE_AGE.name)
     .addModule(CY.modules().FACE_GENDER.name)
     .addModule(CY.modules().FACE_EMOTION.name)

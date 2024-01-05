@@ -24,17 +24,37 @@
     width: 50px;
     height: 50px;
     /*background-color: rgba(231, 231, 231, 0.089);*/
-    background-image: url("mario2.png");
+    background-image: url("neutro.jpg");
     background-size: contain;
     border-radius: 1.5rem;
+}
+.player-happy {
+    background-image: url("feliz.jpg");
+}
+
+.player-sad {
+    background-image: url("triste.jpg");
+}
+
+.player-surprise {
+    background-image: url("sorprendido.jpg");
+}
+
+.player-angry {
+    background-image: url("enojado.jpg");
 }
 
 
 .obstacle {
     width: 50px;
     height: 50px;
+    background-image: url("muro.jpg"); /* Ruta de la imagen que quieres utilizar */
+    background-size: cover; /* Ajusta la imagen para cubrir todo el contenedor sin distorsionarla */
+    background-repeat: no-repeat;
+    /* Puedes dejar o modificar el color de fondo a tu elección */
     background-color: #333;
 }
+
 .final {
     width: 50px;
     height: 50px;
