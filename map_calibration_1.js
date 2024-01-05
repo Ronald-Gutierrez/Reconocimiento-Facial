@@ -65,14 +65,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Initialize player in the top-left corner
   let playerPosition = mazeArray[0].length + 1;
+  let happyCounter = 0;
+  let sadCounter = 0;
+  let suspriseCounter = 0;
+  let angryCounter = 0;
 
   // Función para mover el cuadrado azul basado en la emoción reconocida
   function movePlayerSquare(emotion) {
     const row = Math.floor(playerPosition / mazeArray[0].length);
     const col = playerPosition % mazeArray[0].length;
 
-    // Elimina el rastro del jugador antes de moverlo
-    cells[playerPosition].classList.remove("player");
+    let changePosition  = false;
 
     // Lógica para controlar el juego basado en la emoción detectada
     if (gameStandby) {
@@ -90,55 +93,75 @@ document.addEventListener("DOMContentLoaded", function () {
           }, 500);
           break;
         case "Happy": // Mueve hacia abajo
-          $happyIcon.classList.add("shine");
-          if (row + 1 < mazeArray.length && mazeArray[row + 1][col] !== "X") {
-            playerPosition += mazeArray[0].length;
-          }
-          setTimeout(() => {
-            if ($happyIcon.classList.contains("shine")) {
-              $happyIcon.classList.remove("shine");
+          happyCounter++;
+          if(happyCounter > 10){
+            happyCounter = 0;
+            changePosition = true;
+            $happyIcon.classList.add("shine");
+            if (row + 1 < mazeArray.length && mazeArray[row + 1][col] !== "X") {
+              playerPosition += mazeArray[0].length;
             }
-          }, 500);
+            setTimeout(() => {
+              if ($happyIcon.classList.contains("shine")) {
+                $happyIcon.classList.remove("shine");
+              }
+            }, 500);
+          }
           break;
         case "Sad": // Mueve hacia arriba
-          $thirstyIcon.classList.add("shine");
-          if (row - 1 >= 0 && mazeArray[row - 1][col] !== "X") {
-            playerPosition -= mazeArray[0].length;
-          }
-          setTimeout(() => {
-            if ($thirstyIcon.classList.contains("shine")) {
-              $thirstyIcon.classList.remove("shine");
+          if(sadCounter > 10){
+            sadCounter = 0;
+            changePosition = true;
+            $thirstyIcon.classList.add("shine");
+            if (row - 1 >= 0 && mazeArray[row - 1][col] !== "X") {
+              playerPosition -= mazeArray[0].length;
             }
-          }, 500);
+            setTimeout(() => {
+              if ($thirstyIcon.classList.contains("shine")) {
+                $thirstyIcon.classList.remove("shine");
+              }
+            }, 500);
+          }
           break;
         case "Surprise": // Mueve hacia la derecha
-          $surprisedIcon.classList.add("shine");
-          if (col + 1 < mazeArray[0].length && mazeArray[row][col + 1] !== "X") {
-            playerPosition += 1;
-          }
-          setTimeout(() => {
-            if ($surprisedIcon.classList.contains("shine")) {
-              $surprisedIcon.classList.remove("shine");
+          if(surpriseCounter > 10){
+            surpriseCounter = 0;
+            changePosition = true;
+            $surprisedIcon.classList.add("shine");
+            if (col + 1 < mazeArray[0].length && mazeArray[row][col + 1] !== "X") {
+              playerPosition += 1;
             }
-          }, 500);
+            setTimeout(() => {
+              if ($surprisedIcon.classList.contains("shine")) {
+                $surprisedIcon.classList.remove("shine");
+              }
+            }, 500);
+          }
           break;
         case "Angry": // Mueve hacia la izquierda
-          $angryIcon.classList.add("shine");
-          if (col - 1 >= 0 && mazeArray[row][col - 1] !== "X") {
-            playerPosition -= 1;
-          }
-          setTimeout(() => {
-            if ($angryIcon.classList.contains("shine")) {
-              $angryIcon.classList.remove("shine");
+          if(angryCounter > 10){
+            angryCounter = 0;
+            changePosition = true;
+            $angryIcon.classList.add("shine");
+            if (col - 1 >= 0 && mazeArray[row][col - 1] !== "X") {
+              playerPosition -= 1;
             }
-          }, 500);
+            setTimeout(() => {
+              if ($angryIcon.classList.contains("shine")) {
+                $angryIcon.classList.remove("shine");
+              }
+            }, 500);
+          }
           break;
         // Maneja otras emociones según sea necesario
       }
-
-      // Mueve el jugador y actualiza la representación visual en el tablero
-      playerSquare = cells[playerPosition];
-      playerSquare.classList.add("player");
+      if(changePosition){
+        // Elimina el rastro del jugador antes de moverlo
+        cells[playerPosition].classList.remove("player");
+        // Mueve el jugador y actualiza la representación visual en el tablero
+        playerSquare = cells[playerPosition];
+        playerSquare.classList.add("player");
+      }
 
       // Check if the player reached the goal (customize the goal position as needed)
       if (playerPosition === cells.length - 9 /*- mazeArray[0].length - 2*/) {

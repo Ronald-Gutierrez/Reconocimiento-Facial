@@ -57,9 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const row = Math.floor(playerPosition / mazeArray[0].length);
         const col = playerPosition % mazeArray[0].length;
 
-        // Elimina el rastro del jugador antes de moverlo
-        cells[playerPosition].classList.remove("player", "player-happy", "player-sad", "player-surprise", "player-angry");
-
+        
         // Lógica para controlar el juego basado en la emoción detectada
         if (gameStandby) {
             if (smileDetected && emotion === "Happy") {
@@ -121,9 +119,12 @@ document.addEventListener("DOMContentLoaded", function () {
                     break;
             }
 
+            // Elimina el rastro del jugador antes de moverlo
+            cells[playerPosition].classList.remove("player", "player-happy", "player-sad", "player-surprise", "player-angry");
             // Mueve el jugador y actualiza la representación visual en el tablero
             playerSquare = cells[playerPosition];
             playerSquare.classList.add("player", `player-${emotion.toLowerCase()}`);
+            //helpers de movimiento
 
             // Check if the player reached the goal (customize the goal position as needed)
             if (playerPosition === cells.length - mazeArray[0].length - 2) {

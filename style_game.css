@@ -24,24 +24,37 @@
     width: 50px;
     height: 50px;
     /*background-color: rgba(231, 231, 231, 0.089);*/
-    background-image: url("neutro.jpg");
+    background-image: url("assets/player/neutro.jpg");
     background-size: contain;
     border-radius: 1.5rem;
 }
 .player-happy {
-    background-image: url("feliz.jpg");
+    background-image: url("assets/player/feliz.jpg");
 }
 
 .player-sad {
-    background-image: url("triste.jpg");
+    background-image: url("assets/player/triste.jpg");
 }
 
 .player-surprise {
-    background-image: url("sorprendido.jpg");
+    background-image: url("assets/player/sorprendido.jpg");
 }
 
 .player-angry {
-    background-image: url("enojado.jpg");
+    background-image: url("assets/player/enojado.jpg");
+}
+
+.help-happy{
+    background-image: url("assets/help/feliz_abajo");
+}
+.help-sad{
+    background-image: url("assets/help/triste_arriba");
+}
+.help-angry{
+    background-image: url("assets/help/enojado_izquierda");
+}
+.help-surprise{
+    background-image: url("assets/help/sosprendido_derecha");
 }
 
 
