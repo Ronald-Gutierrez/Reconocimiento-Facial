@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Concert+One&family=Encode+Sans+Condensed:wght@500&family=Gelasio&family=Montserrat:wght@200&family=Suranna&display=swap');
 body, html {
   height: 100vh;
   font-family: Arial, sans-serif;
@@ -6,7 +6,7 @@ body, html {
   text-align: center;
   margin: 0;
   padding: 0;
-  
+  font-family: 'Montserrat', sans-serif;;
 }
 
 header {
@@ -182,6 +182,12 @@ header {
   align-items: center;
 }
 
+button {
+  padding: 10px 20px;
+  margin: 0 10px;
+  cursor: pointer;
+}
+
 
 .popup {
   display: none;
@@ -191,6 +197,7 @@ header {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
+  z-index: 5;
 }
 
 .popup-content {
@@ -204,12 +211,47 @@ header {
   text-align: center;
 }
 
-button {
-  padding: 10px 20px;
-  margin: 0 10px;
-  cursor: pointer;
-}
+
 
 .popup-content{
-  background: rgb(157, 255, 157);
+  background: rgb(167, 111, 0);
+  width: 25rem;
+  height: 12rem;
+  font-size: 25px;
+  font-weight: bold;
+  color: white;
+}
+.popup-content .stars{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+  font-size: 30px;
+  font-weight: bold;
+}
+.popup-content .stars span{
+  font-size: 30px;
+}
+
+.popup-content .button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+}
+
+.popup-content .button-restart{
+  background: rgb(15, 35, 163);
+  color: white;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  border: white;
+}
+
+.popup-content .button-next{
+  background: rgb(25, 158, 25);
+  color: white;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  border: white;
 }

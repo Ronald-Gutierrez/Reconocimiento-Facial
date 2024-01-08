@@ -34,14 +34,14 @@ document.addEventListener('DOMContentLoaded', function () {
   const emo_div = document.querySelector("#emotion");
 
   window.addEventListener(CY.modules().FACE_AGE.eventName, (evt) => {
-    age_div.textContent = 'Edad: ' + evt.detail.output.numericAge;
+    //age_div.textContent = 'Edad: ' + evt.detail.output.numericAge;
   });
 
   window.addEventListener(CY.modules().FACE_GENDER.eventName, (evt) => {
     const generoEnIngles = evt.detail.output.mostConfident;
     const generoEnEspanol = generosEnEspanol[generoEnIngles];
 
-    gen_div.textContent = 'Género: ' + generoEnEspanol;
+    //gen_div.textContent = 'Género: ' + generoEnEspanol;
   });
 
   window.addEventListener(CY.modules().FACE_EMOTION.eventName, (evt) => {

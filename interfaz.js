@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
     buttons.forEach(function(button) {
       button.addEventListener('click', function() {
         // Redirige al usuario a index.html
-        window.location.href = 'calibration_down.html';
+        window.location.href = 'levels/level1.html';
       });
     });
   });

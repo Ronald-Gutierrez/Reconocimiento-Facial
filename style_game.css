@@ -16,7 +16,7 @@
 
 .shine{
     border: #f00;
-    outline: 2px solid rgba(255, 255, 37, 0.662); /* Contorno blanco con opacidad */
+    outline: 2px solid rgba(249, 86, 86, 0.662); /* Contorno blanco con opacidad */
     box-shadow: 0 0 10px 5px rgba(255, 255, 255, 0.7);
 }
 
@@ -45,23 +45,39 @@
 }
 
 .help-happy{
-    background-image: url("assets/help/feliz_abajo");
+    background-image: url("assets/help/feliz_abajo.png");
+    background-size: contain;
+    animation: parpadeo 1s infinite;
 }
 .help-sad{
-    background-image: url("assets/help/triste_arriba");
+    background-image: url("assets/help/triste_arriba.png");
+    background-size: contain;
+    animation: parpadeo 1s infinite;
 }
 .help-angry{
-    background-image: url("assets/help/enojado_izquierda");
+    background-image: url("assets/help/enojado_izquierda.png");
+    background-size: contain;
+    animation: parpadeo 1s infinite;
 }
 .help-surprise{
-    background-image: url("assets/help/sosprendido_derecha");
+    background-image: url("assets/help/sosprendido_derecha.png");
+    background-size: contain;
+    animation: parpadeo 1s infinite;
+}
+@keyframes parpadeo {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
 }
 
 
 .obstacle {
     width: 50px;
     height: 50px;
-    background-image: url("muro.jpg"); /* Ruta de la imagen que quieres utilizar */
+    background-image: url("assets/map/muro.jpg"); /* Ruta de la imagen que quieres utilizar */
     background-size: cover; /* Ajusta la imagen para cubrir todo el contenedor sin distorsionarla */
     background-repeat: no-repeat;
     /* Puedes dejar o modificar el color de fondo a tu elección */
@@ -71,7 +87,7 @@
 .final {
     width: 50px;
     height: 50px;
-    background-image: url("bandera-cuadros-carrera.jpg");
+    background-image: url("assets/map/bandera-cuadros-carrera.jpg");
     background-size: cover; /* Esta propiedad ajusta la imagen para cubrir todo el contenedor sin distorsionarla */
     background-repeat: no-repeat;
     /* background-color: #f00; */
