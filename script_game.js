@@ -35,10 +35,10 @@ function game(map){
         if (emotionEnIngles === "Happy" && !smileDetected) {
             smileDetected = true;
             setTimeout(() => {
-                movePlayerSquare(player, map, emotionEnIngles, smileDetected);
+                movePlayerSquare(player, map, cells, emotionEnIngles, smileDetected);
             }, 1000);
         } else {
-            movePlayerSquare(player, map, emotionEnIngles, smileDetected);
+            movePlayerSquare(player, map, cells, emotionEnIngles, smileDetected);
         }
     });
 
@@ -155,7 +155,7 @@ function createMapDOM(map){
     return cells
 }
 // Función para mover al jugador basado en la emoción reconocida
-function movePlayerSquare(player, map, emotion, smileDetected) {
+function movePlayerSquare(player, map, cells, emotion, smileDetected) {
     // Lógica para controlar el juego basado en la emoción detectada
     if (gameStandby) {
         if (smileDetected && emotion === "Happy") {
@@ -210,7 +210,7 @@ function movePlayerSquare(player, map, emotion, smileDetected) {
             if(player.direction === 2){
                 if (player.position.row + 1 < map.length && 
                     map[player.position.row + 1][player.position.col] !== "X") {
-                        deleteMovementHelpers(player.position)
+                        deleteMovementHelpers(player.position, cells)
                         player.position.row++;
                         cells[(player.position.row)  * 10 + player.position.col].classList.add("player", `player-${emotion.toLowerCase()}`);
                         createMovementHelpers(player.position, map, cells)
@@ -219,7 +219,7 @@ function movePlayerSquare(player, map, emotion, smileDetected) {
             if(player.direction === 8){
                 if (player.position.row - 1 >= 0 && 
                     map[player.position.row - 1][player.position.col] !== "X") {
-                        deleteMovementHelpers(player.position)
+                        deleteMovementHelpers(player.position, cells)
                         player.position.row--;
                         cells[(player.position.row)  * 10 + player.position.col].classList.add("player", `player-${emotion.toLowerCase()}`);
                         createMovementHelpers(player.position, map, cells)
@@ -228,7 +228,7 @@ function movePlayerSquare(player, map, emotion, smileDetected) {
             if(player.direction === 6){
                 if (player.position.col + 1 < map[0].length && 
                     map[player.position.row][player.position.col + 1] !== "X") {
-                        deleteMovementHelpers(player.position)
+                        deleteMovementHelpers(player.position, cells)
                         player.position.col += 1;
                         cells[(player.position.row)  * 10 + player.position.col].classList.add("player", `player-${emotion.toLowerCase()}`);
                         createMovementHelpers(player.position, map, cells)
@@ -237,7 +237,7 @@ function movePlayerSquare(player, map, emotion, smileDetected) {
             if(player.direction === 4){
                 if (player.position.col - 1 >= 0 && 
                     map[player.position.row][player.position.col - 1] !== "X") {
-                        deleteMovementHelpers(player.position)
+                        deleteMovementHelpers(player.position, cells)
                         player.position.col -= 1;
                         cells[(player.position.row)  * 10 + player.position.col].classList.add("player", `player-${emotion.toLowerCase()}`);
                         createMovementHelpers(player.position, map, cells)
@@ -273,7 +273,7 @@ function createMovementHelpers(position, map, cells){
     }
 }
 // Delete player and helpers before move it
-function deleteMovementHelpers(position){
+function deleteMovementHelpers(position, cells){
     cells[(position.row)*10 + position.col].classList.remove("player", "player-happy", "player-sad", "player-surprise", "player-angry");
     cells[(position.row)*10 + position.col].classList.add("cell");
     cells[(position.row + 1)*10 + position.col].classList.remove("help-happy", "help-sad", "help-surprise", "help-angry")
