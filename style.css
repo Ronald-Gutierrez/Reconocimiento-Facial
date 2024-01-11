@@ -33,6 +33,15 @@ header {
 }
 
 #video-container {
+  display: flex;
+  justify-content: center;
+}
+
+canvas {
+  position: absolute;
+}
+
+#video-container {
   flex: 1; 
   margin-left: 20px; 
 }
@@ -42,14 +51,14 @@ header {
   text-align: left;
 }
 
-#video-container video {
+/* #video-container video {
   width: 100%;
   max-width: 600px;
   height: auto;
   border-radius: 10px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   
-}
+} */
 
 #results-container>div {
   padding: 10px;
@@ -61,10 +70,6 @@ header {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
-#emotion-histogram {
-  width: 100%; 
-  
-}
 #emotion {
   font-size: 16px;
 }

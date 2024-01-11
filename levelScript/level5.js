@@ -19,5 +19,5 @@ let mapLevel5 = [
   })
   let btn2 = document.getElementById('goToLevel6')
   btn2.addEventListener('click' ,()=>{
-    window.location.href = '../interfaz.html';
+    window.location.href = '../game.html';
   })
