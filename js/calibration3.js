@@ -70,14 +70,15 @@ video.addEventListener('play', () => {
             if (maxEmotion === "sad") {
                 contador += 1
                 counter.innerText = (contador/10).toFixed(0);
-                if(contador === 30){
+                if(contador === 20){
                     contador = 0;
                     window.location.href = 'level3.html';
                 }
-            }else{
-                contador = 0;
-                counter.innerText = contador;
             }
+            // else{
+            //     contador = 0;
+            //     counter.innerText = contador;
+            // }
         }
 
     }, 100);
@@ -166,17 +167,17 @@ function drawPointSad(canvas) {
     ctx.closePath();
     //sonrisa
     ctx.beginPath();
-    ctx.arc(355, 410, 3, 0, 2 * Math.PI);
-    ctx.arc(370, 400, 3, 0, 2 * Math.PI);
+    ctx.arc(355, 420, 3, 0, 2 * Math.PI);
+    ctx.arc(370, 405, 3, 0, 2 * Math.PI);
     ctx.arc(390, 400, 3, 0, 2 * Math.PI);
-    ctx.arc(410, 400, 3, 0, 2 * Math.PI);
-    ctx.arc(425, 410, 3, 0, 2 * Math.PI);
-    ctx.arc(420, 420, 3, 0, 2 * Math.PI);
-    ctx.arc(410, 425, 3, 0, 2 * Math.PI);
-    ctx.arc(390, 425, 3, 0, 2 * Math.PI);
-    ctx.arc(370, 425, 3, 0, 2 * Math.PI);
-    ctx.arc(360, 420, 3, 0, 2 * Math.PI);
-    ctx.arc(355, 410, 3, 0, 2 * Math.PI);
+    ctx.arc(410, 405, 3, 0, 2 * Math.PI);
+    ctx.arc(425, 420, 3, 0, 2 * Math.PI);
+    ctx.arc(420, 425, 3, 0, 2 * Math.PI);
+    ctx.arc(410, 422, 3, 0, 2 * Math.PI);
+    ctx.arc(390, 420, 3, 0, 2 * Math.PI);
+    ctx.arc(370, 422, 3, 0, 2 * Math.PI);
+    ctx.arc(360, 425, 3, 0, 2 * Math.PI);
+    ctx.arc(355, 420, 3, 0, 2 * Math.PI);
     ctx.fill()
     ctx.stroke();
     ctx.closePath();

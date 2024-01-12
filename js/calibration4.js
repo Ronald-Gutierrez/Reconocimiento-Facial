@@ -70,14 +70,15 @@ video.addEventListener('play', () => {
             if (maxEmotion === "angry") {
                 contador += 1
                 counter.innerText = (contador/10).toFixed(0);
-                if(contador === 30){
+                if(contador === 20){
                     contador = 0;
                     window.location.href = 'level4.html';
                 }
-            }else{
-                contador = 0;
-                counter.innerText = contador;
             }
+            // else{
+            //     contador = 0;
+            //     counter.innerText = contador;
+            // }
         }
 
     }, 100);
