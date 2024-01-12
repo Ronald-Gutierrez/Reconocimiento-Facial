@@ -1,8 +1,11 @@
 //Variables globales
 let gameStarted = false;
 let gameStandby = true;
-
-function game(map){
+let audio = {
+    audio_error : new Audio('../assets/sounds/error.mp3'),
+    audio_background : new Audio('../assets/sounds/videoplayback.mp3')
+}
+function game(map, level){
     let cells = createMapDOM(map); //cells has the references to DOM
     console.log("Cree el mapa")
     let player = {
@@ -15,20 +18,18 @@ function game(map){
             angry: 0,
             surprise: 0
         },
-        velocity: 5, //the counter has to reach this velocity to move
+        velocity: 8, //the counter has to reach this velocity to move
     }
-    let audio = {
-        audio_error : new Audio('../assets/sounds/error.mp3'),
-        audio_background : new Audio('../assets/sounds/videoplayback.mp3')
-    }
-    let smileDetected = false;
-    createMovementHelpers(player.position, map, cells)
+    
+    let smileDetected = true;
+    createMovementHelpers(player.position, map, cells, level)
+    audio.audio_background.volume = 0.4
     audio.audio_background.play()
 
     // Initialize player in the top-left corner
     player.direction = 0; //8 arriba, 2 abajo, 6 derecha, 4 izquierda
 
-    
+    startGame()
     /*
     window.addEventListener(CY.modules().FACE_EMOTION.eventName, (evt) => {
         const emotionEnIngles = evt.detail.output.dominantEmotion;
@@ -86,10 +87,10 @@ function game(map){
                 if (maxEmotion === "happy" && !smileDetected) {
                     smileDetected = true;
                     setTimeout(() => {
-                        movePlayerSquare(player, map, cells, maxEmotion, smileDetected);
+                        movePlayerSquare(player, map, cells, maxEmotion, smileDetected, level);
                     }, 1000);
                 } else {
-                    movePlayerSquare(player, map, cells, maxEmotion, smileDetected);
+                    movePlayerSquare(player, map, cells, maxEmotion, smileDetected, level);
                 }
             }
     
@@ -112,15 +113,15 @@ function startGame() {
    
 
     // Oculta los elementos de inicio después de 2 segundos
-    setTimeout(() => {
-        document.getElementById("overlay").style.display = "none";
-        document.getElementById("foregroundSquare").style.display = "none";
-        document.getElementById("startText").style.display = "none";
-    }, 500);
+    // setTimeout(() => {
+    //     document.getElementById("overlay").style.display = "none";
+    //     document.getElementById("foregroundSquare").style.display = "none";
+    //     document.getElementById("startText").style.display = "none";
+    // }, 500);
 
     setInterval(() => {
         messageText.textContent = "EMPEZO EL JUEGO DEL LABERINTO"
-    }, 500)
+    }, 4000)
 }
 
 
@@ -151,8 +152,8 @@ function goToMenu() {
 //*************************  Other funtionalities **********************************
 function forbidKeyPress(event){
     if (event.key.match(/[a-zA-Z]/)) {
+        audio.audio_error.play()
         changeBackgroundAndText();
-        //audio.play()
     }
 }
 
@@ -182,7 +183,7 @@ function changeBackgroundAndText() {
         messageText.textContent = originalTextContent;
         originalBackgroundColor = null;
         originalTextContent = null;
-    }, 2000);
+    }, 4000);
 }
 
 //*************************  Game specific funtionalities **********************************
@@ -210,7 +211,7 @@ function createMapDOM(map){
     return cells
 }
 // Función para mover al jugador basado en la emoción reconocida
-function movePlayerSquare(player, map, cells, emotion, smileDetected) {
+function movePlayerSquare(player, map, cells, emotion, smileDetected, level) {
     // Lógica para controlar el juego basado en la emoción detectada
     console.log("MoveplayerSquare")
     if (gameStandby) {
@@ -226,14 +227,16 @@ function movePlayerSquare(player, map, cells, emotion, smileDetected) {
         const $angryIcon = document.getElementById("right");
         switch (emotion) {
             case "Neutral":
-                shineDOM($neutralIcon)
+                if($neutralIcon)
+                    shineDOM($neutralIcon)
                 break;
             case "happy":
                 player.counter.happy++;
                 if(player.counter.happy > player.velocity){
                     player.counter.happy = 0;
                     player.direction = 2;
-                    shineDOM($happyIcon)
+                    if($happyIcon)
+                        shineDOM($happyIcon)
                 }
                 break;
             case "sad":
@@ -241,7 +244,8 @@ function movePlayerSquare(player, map, cells, emotion, smileDetected) {
                 if(player.counter.sad > player.velocity){
                     player.counter.sad = 0;
                     player.direction = 8;
-                    shineDOM($thirstyIcon)
+                    if($thirstyIcon)
+                        shineDOM($thirstyIcon)
                 }
                 break;
             case "surprised":
@@ -249,7 +253,8 @@ function movePlayerSquare(player, map, cells, emotion, smileDetected) {
                 if(player.counter.surprise > player.velocity){
                     player.counter.surprise = 0;
                     player.direction = 6;
-                    shineDOM($surprisedIcon)
+                    if($surprisedIcon)
+                        shineDOM($surprisedIcon)
                 }
                 break;
             case "angry":
@@ -270,7 +275,7 @@ function movePlayerSquare(player, map, cells, emotion, smileDetected) {
                         deleteMovementHelpers(player.position, cells)
                         player.position.row++;
                         cells[(player.position.row)  * 10 + player.position.col].classList.add("player", `player-${emotion.toLowerCase()}`);
-                        createMovementHelpers(player.position, map, cells)
+                        createMovementHelpers(player.position, map, cells, level)
                 }
             }
             if(player.direction === 8){
@@ -279,7 +284,7 @@ function movePlayerSquare(player, map, cells, emotion, smileDetected) {
                         deleteMovementHelpers(player.position, cells)
                         player.position.row--;
                         cells[(player.position.row)  * 10 + player.position.col].classList.add("player", `player-${emotion.toLowerCase()}`);
-                        createMovementHelpers(player.position, map, cells)
+                        createMovementHelpers(player.position, map, cells, level)
                 }
             }
             if(player.direction === 6){
@@ -288,7 +293,7 @@ function movePlayerSquare(player, map, cells, emotion, smileDetected) {
                         deleteMovementHelpers(player.position, cells)
                         player.position.col += 1;
                         cells[(player.position.row)  * 10 + player.position.col].classList.add("player", `player-${emotion.toLowerCase()}`);
-                        createMovementHelpers(player.position, map, cells)
+                        createMovementHelpers(player.position, map, cells, level)
                 }
             }
             if(player.direction === 4){
@@ -297,7 +302,7 @@ function movePlayerSquare(player, map, cells, emotion, smileDetected) {
                         deleteMovementHelpers(player.position, cells)
                         player.position.col -= 1;
                         cells[(player.position.row)  * 10 + player.position.col].classList.add("player", `player-${emotion.toLowerCase()}`);
-                        createMovementHelpers(player.position, map, cells)
+                        createMovementHelpers(player.position, map, cells, level)
                 }
             }
             player.direction = 0;
@@ -311,12 +316,12 @@ function movePlayerSquare(player, map, cells, emotion, smileDetected) {
     }
 }
 //Add helpers to new position, it needs the map [[]]
-function createMovementHelpers(position, map, cells){
+function createMovementHelpers(position, map, cells, level){
     if(map[position.row + 1][position.col] === ""){
         cells[(position.row + 1)*10 + position.col].classList.remove("cell");
         cells[(position.row + 1)*10 + position.col].classList.add("help-happy")
     }
-    if(map[position.row - 1][position.col] === ""){
+    if(map[position.row - 1][position.col] === "" && level>=3){
         cells[(position.row - 1)*10 + position.col].classList.remove("cell");
         cells[(position.row - 1)*10 + position.col].classList.add("help-sad")
     }
@@ -324,7 +329,7 @@ function createMovementHelpers(position, map, cells){
         cells[(position.row)*10 + position.col + 1].classList.remove("cell");
         cells[(position.row)*10 + position.col + 1].classList.add("help-surprise")
     }
-    if(map[position.row][position.col - 1] === ""){
+    if(map[position.row][position.col - 1] === "" && level>=4){
         cells[(position.row)*10 + position.col - 1].classList.remove("cell");
         cells[(position.row)*10 + position.col - 1].classList.add("help-angry")
     }

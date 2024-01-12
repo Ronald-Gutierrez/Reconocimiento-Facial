@@ -127,6 +127,7 @@
     height: 450px;
 }
 
+
 #overlay {
     position: fixed;
     top: 0;
@@ -156,9 +157,27 @@
     text-align: center;
     font-size: 74px;
     color: #000; /* Color del texto */
-    
   }
-  
+  #foregroundSquareCamera {
+    position: fixed;
+    top: 20%;
+    left: 5%;
+    width: 50%;
+    height: 50%;
+    background-color: #5ff0fa;
+    z-index: 1000;
+    padding: 30px;
+    border-radius: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%; /* Ajusta según sea necesario para centrar verticalmente */
+    transform: translateY(-50%); /* Centra verticalmente el texto */
+    text-align: center;
+    font-size: 25px;
+    color: #000;
+  }
   #startText {
     position: absolute;
     top: 50%; /* Ajusta según sea necesario para centrar verticalmente */

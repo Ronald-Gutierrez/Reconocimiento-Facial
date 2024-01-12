@@ -41,10 +41,6 @@ canvas {
   position: absolute;
 }
 
-#video-container {
-  flex: 1; 
-  margin-left: 20px; 
-}
 
 #results-container {
   flex: 1; 

@@ -1,4 +1,4 @@
-
+let level = 5;
 let mapLevel5 = [
   ["X", "X", "X", "X", "X", "X", "X", "X", "X", "X"],
   ["X", "P", "", "", "X", "", "", "", "", "X"],
@@ -11,7 +11,7 @@ let mapLevel5 = [
   ["X", "X", "X", "X", "X", "X", "X", "X", "X", "X"],
 ];
   
-  document.addEventListener("DOMContentLoaded", game(mapLevel5));
+  document.addEventListener("DOMContentLoaded", game(mapLevel5, 5));
   
   let btn1 = document.getElementById('reStartLevel5')
   btn1.addEventListener('click' ,()=>{
