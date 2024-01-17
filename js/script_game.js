@@ -5,7 +5,7 @@ let audio = {
     audio_error : new Audio('../assets/sounds/error.mp3'),
     audio_background : new Audio('../assets/sounds/videoplayback.mp3')
 }
-function game(map, level){
+function game(map, level, counter_value){
     let cells = createMapDOM(map); //cells has the references to DOM
     console.log("Cree el mapa")
     let player = {
@@ -29,7 +29,7 @@ function game(map, level){
     // Initialize player in the top-left corner
     player.direction = 0; //8 arriba, 2 abajo, 6 derecha, 4 izquierda
 
-    startGame()
+    startGame(counter_value)
     /*
     window.addEventListener(CY.modules().FACE_EMOTION.eventName, (evt) => {
         const emotionEnIngles = evt.detail.output.dominantEmotion;
@@ -43,6 +43,8 @@ function game(map, level){
         }
     });
     */
+    let photo = document.createElement('canvas');
+    let photoValue = false;
     const video = document.getElementById('video')
 
     Promise.all([
@@ -85,6 +87,15 @@ function game(map, level){
                     .reduce((acc, [emotion, score]) => (score > acc[1] ? [emotion, score] : acc), ['', -1]);
     
                 emotion.innerText = maxEmotion;
+                if(!photoValue){
+                    photoValue = decideTakePhoto(maxEmotion,level, photo, photoValue,  video)
+                    //var photoInterval = setInterval(()=>{
+                        //photoValue = decideTakePhoto(maxEmotion,level, photo, photoValue,  video, photoInterval)
+                        //if(photoValue){
+                            //clearInterval(photoInterval)
+                        //}
+                    //}, 500)
+                }
     
                 if (maxEmotion === "happy" && !smileDetected) {
                     smileDetected = true;
@@ -103,29 +114,95 @@ function game(map, level){
     document.addEventListener("keydown", forbidKeyPress);
 }
 
+function decideTakePhoto(emotion, level,  photo, photoValue,  video){
+    if(!photoValue){
+        if( level === 1 && emotion === 'happy'){
+            takePhoto(photo, video)
+            savePhoto(photo)
+            return true
+        }
+        if( level === 2 && emotion === 'surprised'){
+            takePhoto(photo, video)
+            savePhoto(photo)
+            return true
+        }
+        if( level === 3 && emotion === 'sad'){
+            takePhoto(photo, video)
+            savePhoto(photo)
+            return true
+        }
+        if( level === 4 && emotion === 'angry'){
+            takePhoto(photo, video)
+            savePhoto(photo)
+            return true
+        }
+        if( level === 5 && emotion === 'angry'){
+            takePhoto(photo, video)
+            savePhoto(photo)
+            return true;
+        }
+        return false
+    }
+    return false
+}
 
+function takePhoto(photo, video){
+    photo.width = video.videoWidth;
+    photo.height = video.videoHeight;
+    const context = photo.getContext('2d');
+    context.drawImage(video, 0, 0, photo.width, photo.height);
+}
+
+function savePhoto(photo){
+    console.log("save photo")
+    let imageRef = document.getElementById('imageResult')
+    imageRef.src = photo.toDataURL('image/png')
+    // Crear un enlace (a) para descargar la imagen
+    //const link = document.createElement('a');
+    //link.href = photo.toDataURL('image/png');
+    //link.download = 'captura.png';
+
+    // Simular un clic en el enlace para descargar la imagen
+    //link.click();
+}
 
 
 //Game general functionalities
 
-function startGame() {
+function startGame(counter_value) {
     gameStandby = false;
     gameStarted = true;
     //audio_fondo.play()
    
 
-    // Oculta los elementos de inicio después de 2 segundos
-    // setTimeout(() => {
-    //     document.getElementById("overlay").style.display = "none";
-    //     document.getElementById("foregroundSquare").style.display = "none";
-    //     document.getElementById("startText").style.display = "none";
-    // }, 500);
-
     setInterval(() => {
         messageText.textContent = "EMPEZO EL JUEGO DEL LABERINTO"
     }, 4000)
+    const counter = document.getElementById('counter');
+    counter.textContent = counter_value
+    const counter_level = setInterval(()=>{
+        if(gameStarted){
+            if(!gameStandby && counter.textContent > 0){
+                counter.textContent = counter.textContent - 1
+                if(counter.textContent < 10){
+                    increaseAlert(counter)
+                }
+            }else{
+                clearInterval(counter_level);
+                finishGameLose();
+            }
+        }
+    }, 1000)
 }
 
+function increaseAlert(ele){
+    console.log("Increase alert")
+    ele.style.color = "red"
+    ele.style.fontSize = '2.5rem';
+    setTimeout(() => {
+        ele.style.fontSize = '2rem';
+    }, 500);
+}
 
 function resetGame() {
     gameStandby = true;
@@ -141,13 +218,21 @@ function resetGame() {
     cells[player.position].classList.add("player");
 }
 
-
-function reStartLevel5() {
-    window.location.href = 'index.html';
+function finishGameLose(){
+    gameStandby = false;
+    gameStarted = false;
+    let popup = document.getElementById("popup-loss");
+    popup.style.display = "block";
 }
 
-function goToMenu() {
-    window.location.href = 'interfaz.html';
+function finishGameVictory(){
+    gameStandby = false;
+    gameStarted = false;
+    const counter = document.getElementById('counter');
+    const $points = document.getElementById('points');
+    $points.textContent = counter.textContent + ' '
+    let popup = document.getElementById("popup");
+    popup.style.display = "block";
 }
 
 
@@ -159,10 +244,7 @@ function forbidKeyPress(event){
     }
 }
 
-function displayEndLevelScreen(){
-    let popup = document.getElementById("popup");
-    popup.style.display = "block";
-}
+
 
 //Funcion para actualizar la caja de texto de mensaje al usuario
 function changeBackgroundAndText() {
@@ -215,13 +297,11 @@ function createMapDOM(map){
 // Función para mover al jugador basado en la emoción reconocida
 function movePlayerSquare(player, map, cells, emotion, smileDetected, level) {
     // Lógica para controlar el juego basado en la emoción detectada
-    console.log("MoveplayerSquare")
     if (gameStandby) {
         if (smileDetected && emotion === "happy") {
             startGame();
         }
     } else if (gameStarted) {
-        console.log("Entre al else if")
         const $neutralIcon = document.getElementById("neutral");
         const $happyIcon = document.getElementById("up");
         const $thirstyIcon = document.getElementById("down");
@@ -313,10 +393,12 @@ function movePlayerSquare(player, map, cells, emotion, smileDetected, level) {
 
         // Check if the player reached the goal (customize the goal position as needed)
         if (cells[player.position.row *  10 + player.position.col].classList.contains('final')) {
-            displayEndLevelScreen()
+            finishGameVictory()
         }
     }
 }
+
+
 //Add helpers to new position, it needs the map [[]]
 function createMovementHelpers(position, map, cells, level){
     if(map[position.row + 1][position.col] === ""){

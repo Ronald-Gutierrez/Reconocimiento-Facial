@@ -11,14 +11,12 @@ let mapLevel1 = [
     ["X", "M", "X", "X", "X", "X", "X", "X", "X", "X"],
   ];
 
-document.addEventListener("DOMContentLoaded", game(mapLevel1, 1));
+document.addEventListener("DOMContentLoaded",()=>{
+    game(mapLevel1, 1, 20);
+});
 
-let btn1 = document.getElementById('reStartLevel1')
-btn1.addEventListener('click' ,()=>{
-    window.location.href = 'level1.html';
-})
+
 let btn2 = document.getElementById('goToLevel2')
 btn2.addEventListener('click' ,()=>{
-    console.log("Entre hice click")
     window.location.href = 'calibration2.html';
 })

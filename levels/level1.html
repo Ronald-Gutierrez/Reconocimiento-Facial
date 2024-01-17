@@ -19,26 +19,59 @@
       <p><strong>¡Felicidades!</strong></p>
       <div class="stars">
         <span>🏅</span>
-        <span>🏅</span>
+        <p id="points"></p><p> puntos</p>
         <span>🏅</span>
       </div>
-      <p>GANASTE</p>
-      <button id="reStartLevel1" class="button-restart">
-        <div class="button">
-          <span class="material-symbols-outlined">restart_alt</span>
-          <p>Repetir Nivel</p>
-        </div>
-      </button>
-      <button id="goToLevel2"  class="button-next">
-        <div class="button">
-          
-          <span class="material-symbols-outlined">navigate_next</span>
-          <p>Siguiente Nivel</p>
-        </div>
-      </button>
+      <div class="img">
+        <img src="" alt="Imagen de reconocimiento" id="imageResult" width="150px" height="100px"/>
+      </div>
+      <p>GANASTE!!</p>
+      <div class="buttons">
+
+        <button id="reStartLevel1" class="button-restart" onclick="location.reload()">
+          <div class="button">
+            <span class="material-symbols-outlined">restart_alt</span>
+            <p>Repetir Nivel</p>
+          </div>
+        </button>
+        <button id="goToLevel2"  class="button-next">
+          <div class="button">
+            
+            <span class="material-symbols-outlined">navigate_next</span>
+            <p>Siguiente Nivel</p>
+          </div>
+        </button>
+      </div>
     </div>
   </div>
   <!-- End Pop up-->
+  <!-- Pop up Derrota -->
+  <div class="popup" id="popup-loss">
+    <div class="popup-content">
+      <p><strong>Game Over!</strong></p>
+      <div class="stars">
+        <span>😐</span>
+        <span>😐</span>
+        <span>😐</span>
+      </div>
+      <p>Derrota</p>
+      <div class="buttons">
+        <button class="button-restart" onclick="location.reload()">
+          <div class="button">
+            <span class="material-symbols-outlined">restart_alt</span>
+            <p>Repetir Nivel</p>
+          </div>
+        </button>
+        <button class="button-next" onclick="location.href = '/game.html'">
+          <div class="button">
+            <span class="material-symbols-outlined">menu</span>
+            <p>Ir al Menu</p>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- End Pop up Derrota-->
   <!-- Overlay-->
   <!-- <div id="overlay"></div>
   <div id="foregroundSquare">Sonríe para empezar <br>
@@ -51,6 +84,7 @@
   </header>
   <div class="main">
     <div class="main-game">
+      <p>Tiempo restante: <strong id="counter">2</strong></p>
       <div class="sub-game">
         <div class="game">
           <div id="maze"></div>
